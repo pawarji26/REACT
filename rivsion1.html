@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Superhero Cards</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f8f8f8;
+      }
+
+      #root {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .superhero-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 300px;
+      }
+
+      .superhero-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .superhero-details {
+        padding: 20px;
+      }
+
+      .is-bachelor-true {
+        color: red;
+      }
+
+      .is-bachelor-false {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+      const SuperheroCard = (props) => {
+        const { name, age, powers, address, isBachelor, imageUrl } = props.superhero;
+
+        return (
+          <div className="superhero-card">
+            <img className="superhero-image" src={imageUrl} alt={name} />
+            <div className="superhero-details">
+              <h2>{name}</h2>
+              <p>Age: {age}</p>
+              <p>Powers: {powers.join(', ')}</p>
+              <p>
+                Address: {address.street}, {address.city}, {address.country}
+              </p>
+              <p className={isBachelor ? 'is-bachelor-true' : 'is-bachelor-false'}>
+                {isBachelor ? 'Bachelor' : 'Not Bachelor'}
+              </p>
+            </div>
+          </div>
+        );
+      };
+
+      function App() {
+        const superheroes = [
+          {
+            name: 'Batman',
+            powers: ['Rich', 'Fly', 'Genius'],
+            address: {
+              street: 'Gotham St',
+              city: 'Gotham',
+              country: 'USA',
+            },
+            age: 21,
+            isBachelor: true,
+            imageUrl:
+              'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAlAMBIgACEQEDEQH/xAAcAAABBAMBAAAAAAAAAAAAAAAAAQIDBQQGBwj/xABDEAABAwIEAgcFBQcACwEAAAABAAIDBBEFEiExBkEHEyJRYXGRFDKBobEjUtHh8DNCkrLBwvEWJUNEU2JjcoKD0hX/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAHxEBAQEBAAEEAwAAAAAAAAAAAAECEQMSITFRExRS/9oADAMBAAIRAxEAPwDuKTLrdKhAIQhAJLhI51tE1oN7oI6ilbO8Oc4ggWsFOBYJUIELgCATvoEOc1vvEDW2q1XjPGIsIxbh19TJ1dMauQyu1sB1Tmgn+NUfFnSJgE/DtcMOr3e1RZJIrxubdzXtdoSNdkHRHPA0B1TWtLjchNp3CeGOW+j2hw+KnQINEqEIBCRKghqIBOwNcSADe4ToIxFGGA3AUiEAhCEAhCEAoy/kN0r7k2sfVK1tkCNZrc7p6EIBCElwg5P06TZH4OwHUiUkeGgXKKoMkp3MGmZpa46Dfmu5dKuCU2LjBHTymEmt9n6wW0D2uI38Wj1XPcQ4CfhuHYxW1eJB0dJTufG1jLGZ4BIuSTbWwtr5rN3M+1amLZ2O18K1LKzhvCqmM3ZLRxPBt3tCtVRcDPhdwhg3szS2NlHGwMJuWFoylp8QQR8FerTISFKhBhU8VQ2pLpCcmv711mjZCEAhCa89nRApI70KPK463shBKmk2KchAiVCEAhCjmY97MrH5CeYQMll1McJvJvbuWs43xlgnD5kE9Uaqu1Hs8PacD3X2Hx18CsnjfEv9H+E66sgf1c1mxskO4c9wbf4XuvOwMkwkdHUtZpd75n5TbXZvzQbBxtxriPEjxBUAwUoeHRQsuMjhs4nv8foqyu4n4gxalZSV9WaiCJ7SGsiAMlju63vWRBT4MW+z4vXGmndIyN3VxB3V3F8znOPujQG1tTzGqZFHTzNcI3xtGZzYpKeJzesymx0B05G9tnBZ7nV5xe2RbcM8YYtw7UAwSudA83fDM05HfgfEfkuscN9I2D4w9kE2ajqHWAEp7Dj4O5fGy4LLI6OQxumbIeZYbn4jdOizWBD2k97dLrbL1YDdKtP6MMVkxLheFlQ/PPSu6ouzXu3duvkbfBbgooQhMc6xt80EVXK+GLMwC/inUr3Swh7wA43uApbX3SoBCEIBCEIBNkcGMc87NFynJHtD2lp2IsUEVPUMqA7ID2e9TKOGFkN8gtffVSIOddN9U6LhWClY3OamrYCPBoLvqAuU07mNh9lzPZK39rG4ZmPJ5tPIeBW59NGKuHFGH4c/rDBT0wqS0bFznOA/kXPzVxTsMc7QXueCHNbckHlffTl5qxKt6fHGUjqOlraSiqvZHl8MkrSCwOuLOt741O/glrZZZKqWqkfZ8ozEwxBjGtJvYXJtvrfVVf2Ys1lMA0ciBr6ozUjZGCVvVxtZ2GSatbr3eKznx5zr1SLdWzlV+KzGe725gxm7y65J8+9SvZ1Upa6wdmILmjQnkbdxGo+KkrsstZN1dNLFA6POWDs5rWs4t5anT0WPFURz0nUTZTLEQxrx3Dkf1pZaqOr9B1e4T4nQTuYC5rJYbO9+xcHWHK3Y9V1xed+i6udScY0PaBje50b3lwGW4PvfruXoMkvNhoFFKXEmzU5re9DWBqcgEIQgEIQgEl0qaRcoHIQhAKu4gxVmC4PVYjI3M2BmbKBuSQB8yrFc26ZcRdFQ0dHBOGu64Pnj+8wtfb5s+iDlPHOMT49jEtdUODWzuLY239xjTo39c796q8Psx8sD2Bxytew75HtuR66rEmqchJlILCHWaT4rYeDuHKvFsLkrKR7XSyvtkedmxltiD43eD8PFZ35M+Od1fYmbr2iAl7TYQv07nAj6qSLqYyaitYA2AXAdqe/TxNwFcO4UrY6H2p84FgQG6kaH7yko+EMTqJqaWUM9lYTJmuSb8ja2oGp37lj9vw876o1+Lf003FK2WCGaWeORtVO/M/MNG2vlHluVS07XQ1Toi4DvJW68W8L1VPhEldWVDCbRvjiY0+5c3ue/VapG5rMRrXu13Fu+4/ILePLjyTub1NZufldYdV1FA+SphiL7BocwtHa5gbePJemeHq9uI4RQ1HWB0klNHI8X1u5u59CvM0E5ywAC273nybYfRd46I6aODgmhkaJesnGeV8puXOFm6f8AKAAB4BbRuiEIUDXODRdxA80rXBwuCCO8KCrgNRGGNdl1UlPH1UQZ3IJEIQgYwG97p6EIBCFBNOGdhgzyH90HZA+WZkTbvNvDvXFemycP4hgEbe1HSNue83cR9V2ZkAzCSWzn8u4LjHStFiY4qmkjpnOhcyPI7JoW21N/DVByPFYHU5Yx0jH72dG64PxVvgWLYnR4Q6OkrJYGMLiwRutvqT4/FVePZutjBaWkh5yncaqzgYIaSGPQHKB8U1manLCWz4ZreLsUFEaeR7ZCdpCLG1xuBudEtLxfxCx8UYxN7oQ4DqzFHlIvsbNv81QytyvcByPNZtPFA50ckdw5rAHNN/e77rn+Hx/zF9evtJxDjGKVEEsU9ZM+AgfZu2Fjew7lUSOJrqv/ALm/UKyqWipppWndriPT8lj4bRx1EmaeR7XyEdlo2AtqT8F0zmZnJEt6z6t7YKJ0guLMIFt9SG/ivRfRtpwVhjb3yxlt/IlebMeBhgp4i4EOmBFjuB/kL0Z0Wv6zguj1918jT/GVRtyFhQe0+0nPcR66HmswbKBUIQgEJLpUAhCw5qsx1Ihyg3I180GYo2RMjc5zW2c46lPCVAKCsmZTUs88ptHFG57j3AC6nWt9IlT7LwZipvYzQ9QP/YQz+pQeY+IJHVGLsfIO08F7x4krOqdGNt99v1WDjA6zFpXAi7Yi4Ntv73NZ37Tq76gO1VRiVcd3veNy+3yU9I4OykWF427fFR1Z6oO1BIfnF/L8lj4NIXRC51jJB8iUGbELVE7ORsVVe2z0Uskbe0wm9r212/psrnLaUuG5Zr6rEOETV1c6TK5lGwnrpzazQNdL7nXZBUT1clVUQmUt7LhlaOWq9K9DNT13DdXCf93rC0eRjjd9XFcDxHEaWGCOgwiFrKWV3bm3fNZ2l78vyXa+hKb7LFoL84ZQPNpH9oRXT0IQoBNebN0SnQIGqCPK46oUqEAmljSbkAnyTkIAaIQkJAQKuedM9Q8cPUNLH/t6+LNrs1pzE+ob6rfi4k2Gy5N01VBOK4PTA6QMkkI7y4H/AOPmg4xiN5K+pIG1MT6/5Vm2zZGgHQtsR4i1iq+bWsrj/wBJjfVZEOtRVuc4/ZuBH8IVQzFxeKw3ylYWCOHtT2E2zMWZiDrzsbfctHqVTszwOEli17CCPig2uB0TJ2dexz4xq5rXWJHmsDGMUlrMTbGwNhpGh+Snj0aNHb958U6CUVUHWklrhqCOWn+VXVzDFVNLdSGya9/ZNkEB1gw423cf512zoVmy8SYlFfsyUETgPJ7vxXFiLU+G2++f511rommEPG1OzlPQOZ8QS7+0oruaaXWKa9x2alDebtVA7dKhCAQhCAQhNLgDYkXQK5wbuo7F/knFtzc+idZAlso0XC+laq67i2dv/BZ1YH/hf+9d2K85caz+08SYlKTe884B8A/KPk1WI0qX9vWkb9ZE35hT08YLq17rgOlsT4AD8VC2zpqrxqWD0t+Cz6RrfY6ktJvKX5j5PsgxZoyXxSv1L3gnw10VO5znRzB5uIyANPErYcTsKiNsejC5psNhoFQht4q3TZ4/mKDKwifsPgc3sd/ddZVTA6SGSS9y3S/haywcCGatLQderJA+8QQbfJXzo2PmqCNA6ISMA2H6ugpKWnmqGYfFTsL5BM7sg6kAgldU4GibhvEeFSzsb1zy2NjjyDrt0Pf2jry+K5thdc7D6mL7Jrw6axB3GxFjy1/Wy2rDal0WOYTO46sLXDkBYg6dyK9IMYGhPSDUXGyVQCEIQCEIQCqag/6wA5BwSoQWqEIQIeS8x409z697nG5dmJ8SXFCFRR4QA6XEA4A2LnajuFx+vBLhesNU07Z3H1IKEIhkjy6SlJN72v62/oq1v7DEj3O/uKEII8LcY8Rp3NOudo9dCtopdJYrfvRvYfLVCEGugn/9GIcusW2SEtdRuGhDd0IQemaMl1JC47mNpPopkIUU1+yUbIQgVCEIP//Z',
+          },
+          {
+            name: 'Superman',
+            powers: ['Laser Fry', 'Fly', 'Runs Fast'],
+            address: {
+              street: 'Central St',
+              city: 'New York',
+              country: 'USA',
+            },
+            age: 41,
+            isBachelor: false,
+            imageUrl:
+              'data:image/jpeg;base64,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',
+          },
+          {
+            name:'Iron man',
+            powers:['special suit','technogily','thinking'],
+            address:{
+            street:'stark tower'
+            city:'washingtan dc'
+            country:'USA'
+            },
+            age: 41,
+            isBachelor: false,
+            imageUrl:
+            'data:image/jpeg;base64,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'
+          }
+        ];
+
+        return (
+          <div id="root">
+            {superheroes.map((superhero, index) => (
+              <SuperheroCard key={index} superhero={superhero} />
+            ))}
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

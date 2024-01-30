@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Scoreboard</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+      /* these are use to be web page more than attrecvtive and shown the all teram in best way*/
+
+      .scoreboard {
+        border: 2px solid #333;
+        padding: 20px;
+        margin: 20px auto;
+        width: 200px;
+        background-color: #f4f4f4;
+      }
+
+      .button {
+        margin: 5px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #d8230e;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //use the react and  they are add the html dom and react for marge 
+
+      const { useState } = React;
+//upadate the value for the user throug 
+      const CricketScoreboard = () => {
+        const [runs, setRuns] = useState(0);
+        const [wickets, setWickets] = useState(0);
+        // max wicket 10 are  set beacuse cricket matches are only 10 wicket are present 
+        const maxWickets = 10;
+// increment the  run for the user 
+        const increaseRuns = (amount) => {
+          setRuns(runs + amount);
+        };
+// upadet the wicket on one by one 
+        const updateWicket = () => {
+          if (wickets < maxWickets) {
+            setWickets(wickets + 1);
+          }
+        };
+        //reatrun the all value for html page  on cklic 
+
+        return (
+          <div className="scoreboard">
+            
+            <h2>Cricket Scoreboard</h2>
+            <p>Runs: {runs}</p>
+            <p>Wickets: {wickets}</p>
+            <button className="button" onClick={() => increaseRuns(4)}>Increase runs by 4</button>
+            <button className="button" onClick={() => increaseRuns(8)}>Increase runs by 8</button>
+            <button className="button" onClick={() => increaseRuns(3)}>Increase runs by 3</button>
+            <button className="button" onClick={updateWicket}>Update Wicket</button>
+          </div>
+        );
+      };
+
+      ReactDOM.render(<CricketScoreboard />, document.getElementById('root'));
+    </script>
+  </body>
+</html>

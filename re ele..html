@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSX and Babel</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #root {
+      text-align: center;
+    }
+
+    p {
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+    .p:hover{
+      background-color: chartreuse;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Basic Level
+    const basicElement = <p>Seize the day</p>;
+
+    // Intermediate Level
+    const dynamicText = "Seize the day dynamically";
+    const intermediateElement = <p>{dynamicText}</p>;
+
+    // Advanced Level
+    const isConditionTrue = true;
+    const advancedElement = (
+      <p>
+        {isConditionTrue ? "Seize the day" : "Make the most of it"}
+      </p>
+    );
+
+    // Rendering
+    ReactDOM.render(basicElement, document.getElementById('root'));
+    // For Intermediate Level, comment out the basicElement and uncomment the intermediateElement
+    // ReactDOM.render(intermediateElement, document.getElementById('root'));
+    // For Advanced Level, comment out the basicElement and intermediateElement, and uncomment the advancedElement
+    // ReactDOM.render(advancedElement, document.getElementById('root'));
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Component with JSX</title>
+    <style>
+      /* Optional: Add styles to make it visually appealing */
+      .main {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script type="text/babel">
+      // Your React component code here
+      function MyComponent() {
+        const [buttonText, setButtonText] = React.useState("Alert Hello");
+
+        const showAlert = () => {
+          alert('Hello');
+        };
+
+        const toggleButtonText = () => {
+          setButtonText((prevText) => (prevText === "Alert Hello" ? "Alert Bye" : "Alert Hello"));
+        };
+
+        return (
+          <>
+            <p>React is a JavaScript library</p>
+            <div className="main">
+              <p>Click the below button to alert 'Hello'</p>
+              <button onClick={() => { showAlert(); toggleButtonText(); }}>{buttonText}</button>
+              <button onClick={() => { showAlert(); toggleButtonText(); }}>{buttonText}</button>
+            </div>
+          </>
+        );
+      }
+
+      // Rendering your component
+      ReactDOM.render(<MyComponent />, document.getElementById('root'));
+    </script>
+  </body>
+</html>

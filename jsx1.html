@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSX Showcase</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script type="text/babel">
+      // JSX Showcase Component
+      function JSXShowcase() {
+        // JavaScript Integration: Variables
+        const username = "roshan pathekar";
+
+        // JavaScript Integration: Functions
+        const greetUser = () => {
+          alert(`Hello, ${username}!`);
+        };
+
+        // JavaScript Integration: Arrays
+        const fruits = ["kapil", "rohit", "rakesh"];
+
+        // Conditional Rendering: Example boolean variable
+        const isLoggedIn = true;
+
+        return (
+          <div>
+            {/* Element Rendering: Heading */}
+            <h1>JSX Showcase</h1>
+
+            {/* Element Rendering: Paragraph */}
+            <p>Welcome to this JSX showcase component!</p>
+
+            {/* JavaScript Integration: Variable */}
+            <p>User: {username}</p>
+
+            {/* JavaScript Integration: Function */}
+            <button onClick={greetUser}>Greet User</button>
+
+            {/* JavaScript Integration: Array */}
+            <ul>
+              {fruits.map((fruit, index) => (
+                <li key={index}>{fruit}</li>
+              ))}
+            </ul>
+
+            {/* Conditional Rendering */}
+            {isLoggedIn ? (
+              <p>User is logged in!</p>
+            ) : (
+              <p>User is not logged in.</p>
+            )}
+          </div>
+        );
+      }
+
+      // Rendering JSXShowcase component
+      ReactDOM.render(<JSXShowcase />, document.getElementById('root'));
+    </script>
+  </body>
+</html>

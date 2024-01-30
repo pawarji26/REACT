@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List App</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f8f8;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #root {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        width: 70%;
+      }
+
+      button {
+        padding: 8px;
+        cursor: pointer;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        margin: 5px 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .delete-btn,
+      .complete-btn {
+        cursor: pointer;
+        padding: 5px;
+        border: none;
+        margin-left: 10px;
+      }
+
+      .complete-btn {
+        background-color: #4caf50;
+        color: #fff;
+      }
+
+      .complete-btn:hover {
+        background-color: #45a049;
+      }
+
+      .delete-btn {
+        background-color: #f44336;
+        color: #fff;
+      }
+
+      .delete-btn:hover {
+        background-color: #d32f2f;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      // React code goes here
+      
+  const { useState } = React;
+
+  const TodoApp = () => {
+    const [tasks, setTasks] = useState([]);
+    const [newTask, setNewTask] = useState('');
+
+    const addTask = () => {
+      if (newTask.trim() !== '') {
+        setTasks([...tasks, { text: newTask, completed: false }]);
+        setNewTask('');
+      }
+    };
+
+    const deleteTask = (index) => {
+      const updatedTasks = [...tasks];
+      updatedTasks.splice(index, 1);
+      setTasks(updatedTasks);
+    };
+
+    const toggleComplete = (index) => {
+      const updatedTasks = [...tasks];
+      updatedTasks[index].completed = !updatedTasks[index].completed;
+      setTasks(updatedTasks);
+    };
+
+    return (
+      <div>
+        <h1>Todo List</h1>
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          placeholder="Add a new task..."
+        />
+        <button onClick={addTask}>Add</button>
+        <ul>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              {task.text}
+              <div>
+                <button className="delete-btn" onClick={() => deleteTask(index)}>
+                  Delete
+                </button>
+                <button
+                  className={`complete-btn ${task.completed ? 'completed' : ''}`}
+                  onClick={() => toggleComplete(index)}
+                >
+                  {task.completed ? 'Undo' : 'Complete'}
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
+  ReactDOM.render(<TodoApp />, document.getElementById('root'));
+</script>
+
+    
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom JSX Components</title>
+    <style>
+        body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #root {
+      text-align: center;
+    }
+
+    p {
+      font-size: 24px;
+      color: #333;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script type="text/babel">
+      // Header Component
+      const Header = ({ title }) => <header>{title}</header>;
+
+      // Content Component with Nested Components
+      const Content = () => {
+        return (
+          <section>
+            <p>This is the content section.</p>
+            <NestedComponent />
+          </section>
+        );
+      };
+
+      // Nested Component
+      const NestedComponent = () => <p>Nested component inside Content.</p>;
+
+      // Footer Component with Data from Header
+      const Footer = ({ author }) => <footer>Created by {author}</footer>;
+
+      // App Component: Combining Header, Content, and Footer
+      const App = () => {
+        const headerTitle = "React Components";
+        const footerAuthor = "Your Name";
+
+        return (
+          <div>
+            <Header title={headerTitle} />
+            <Content />
+            <Footer author={footerAuthor} />
+          </div>
+        );
+      };
+
+      // Rendering App component
+      ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
